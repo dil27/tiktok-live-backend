@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.IO Data</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+<body>
+    <h2>Data dari Server:</h2>
+    <ul id="data-list"></ul>
+
+    <script>
+        // Koneksi ke server
+        const socket = io("http://localhost:3000");
+
+        // Menerima data dari server
+        socket.on("chat", (data) => {
+            console.log("Received:", data);
+
+            // Tampilkan data ke halaman
+            const li = document.createElement("li");
+            li.textContent = `${data.nickname}: ${data.message}`;
+            document.getElementById("data-list").appendChild(li);
+        });
+    </script>
+</body>
+</html>
